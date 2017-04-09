@@ -8,6 +8,8 @@ Make buttons images instead of art we write code for
 
 String menu = "home";//used to tell what menu we are on, change when we click on buttons
 String difficulty = "easy";
+int frames;
+int seconds;
 
 ImageButton start;
 ImageButton rules;
@@ -97,6 +99,8 @@ void mousePressed(){
          keyBoard = new GameBoard(gameBoard);
          keyBoard.randomize();
          menu = "game";
+         frames = 0;
+         seconds = 0;
      }break;
    case "game":
      if(backFromGame.isOver()){
@@ -182,6 +186,39 @@ void drawGame(){
   backFromGame.show();
   gameBoard.show();
   keyBoard.showKey();
+  checkWinCondition();
+  
+  frames++;
+  if(frames==60){
+    seconds++;
+    frames = 0;
+  }
+  fill(0);
+  text("Time: " + seconds,245,100);
+}
+
+void checkWinCondition(){
+ 
+  color[][] gameboard = gameBoard.colors;
+  color[][] keyboard = keyBoard.colors;
+  int iterator = 0;
+  boolean winCondition = false;
+  for(int i = 0; i < gameBoard.sideLength; i++){
+   for(int j = 0; j < gameBoard.sideLength; j++){
+     
+    if(gameboard[i][j] == keyboard[i][j]){
+     iterator++; 
+    }
+     
+   }
+  }
+  
+  if(iterator == (gameBoard.sideLength * gameBoard.sideLength)){
+   winCondition = true; 
+  }
+  if(winCondition){
+   menu = "postGame";
+  }
 }
 
 void drawPostGame(){

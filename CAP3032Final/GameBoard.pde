@@ -77,7 +77,7 @@ class GameBoard{
   stroke(230);
   noFill();
   
-  rect(300,312.5,450,450,50);
+  rect(300,350,450,450,50);
   
   noStroke(); 
   rectMode(CORNER);
@@ -86,7 +86,7 @@ class GameBoard{
     colorMode(HSB);
     
     fill(colors[i][j]);
-    rect(102.5+(i*(400/sideLength)),115+(j*(400/sideLength)),(400/sideLength)-5,(400/sideLength)-5,5);
+    rect(102.5+(i*(400/sideLength)),155+(j*(400/sideLength)),(400/sideLength)-5,(400/sideLength)-5,15);
    }
   }
  }
@@ -99,7 +99,7 @@ class GameBoard{
     colorMode(HSB);
     
     fill(colors[i][j]);
-    rect(225+5+(i*(150/sideLength)),550+(j*(150/sideLength)),(150/sideLength)-5,(150/sideLength)-5,10-sideLength);
+    rect(225+5+(i*(150/sideLength)),600+(j*(150/sideLength)),(150/sideLength)-5,(150/sideLength)-5,10-sideLength);
    }
   }
  }
