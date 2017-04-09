@@ -7,27 +7,41 @@ Make buttons images instead of art we write code for
 */
 
 String menu = "home";//used to tell what menu we are on, change when we click on buttons
+String difficulty = "easy";
 
-//Buttons on "home"
-Button start = new Button(300,600,300,150,#aaccff,"Start");
-Button rules = new Button(300,800,300,150,#ffccaa,"Rules");
+ImageButton start;
+ImageButton rules;
 
-//Buttons on "rules"
-Button backFromRules = new Button(60,60,50,50,#ffaaaa,"<-");
+ImageButton backFromRules;
 
-//Buttons on "preGame"
-Button backFromPreGame = new Button(60,60,50,50,#ffaaaa,"<-");
-Button playGame = new Button(300,600,300,150,#aaccff,"play");
+ImageButton backFromPreGame;
+ImageButton selectEasy;
+ImageButton selectMed;
+ImageButton selectHard;
+ImageButton playGame;
 
-//Buttons on "game"
-Button backFromGame = new Button(60,60,50,50,#ffaaaa,"<-");
-Button simulateWin = new Button(300,600,300,150,#aaffcc,"win");
+ImageButton backFromGame;
+GameBoard gameBoard = new GameBoard(difficulty);
+GameBoard keyBoard;
 
-//Butons on "postGame"
-Button backFromPostGame = new Button(60,60,50,50,#ffaaaa,"<-");
+ImageButton backFromPostGame;
+
 
 void setup(){
   size(600,900);
+  start = new ImageButton(300,675,loadImage("start.png"));
+  rules = new ImageButton(300,800,loadImage("rules.png"));
+  
+  backFromRules = new ImageButton(60,60,loadImage("back.png"));
+  
+  backFromPreGame = new ImageButton(60,60,loadImage("back.png"));
+  selectEasy = new ImageButton(300,300,loadImage("easy.png"));
+  selectMed = new ImageButton(300,425,loadImage("medium.png"));
+  selectHard = new ImageButton(300,550,loadImage("hard.png"));
+  playGame = new ImageButton(300,700,loadImage("play.png"));
+  backFromGame = new ImageButton(60,60,loadImage("back.png"));
+  
+  backFromPostGame = new ImageButton(60,60,loadImage("back.png"));
 }
 
 void draw(){
@@ -69,22 +83,50 @@ void mousePressed(){
      if(backFromPreGame.isOver()){
         menu = "home"; 
      }
+     if(selectEasy.isOver()){
+        difficulty = "easy"; 
+     }
+     if(selectMed.isOver()){
+        difficulty = "medium"; 
+     }
+     if(selectHard.isOver()){
+        difficulty = "hard"; 
+     }
      if(playGame.isOver()){
+         gameBoard = new GameBoard(difficulty);
+         keyBoard = new GameBoard(gameBoard);
+         keyBoard.randomize();
          menu = "game";
      }break;
    case "game":
      if(backFromGame.isOver()){
         menu = "home"; 
      }
-     if(simulateWin.isOver()){
-         menu = "postGame";
-     }break;
+     break;
    case "postGame":
      if(backFromPostGame.isOver()){
          menu = "home";
      }
      break;
   }
+}
+
+void keyPressed(){
+   switch(menu){
+    case "game":
+      if(keyCode==RIGHT){
+        gameBoard.moveRight();
+      }
+      if(keyCode==LEFT){
+        gameBoard.moveLeft();
+      }
+      if(keyCode==UP){
+        gameBoard.moveUp();
+      }
+      if(keyCode==DOWN){
+        gameBoard.moveDown();
+      }
+   }
 }
 
 void drawHome(){
@@ -104,17 +146,42 @@ void drawRules(){
 void drawPreGame(){
   background(255);
   textSize(30);
-  text("[will select difficulty and game type here]",300,200);
+  
+  rectMode(CENTER);
+  strokeWeight(5);
+  
+  switch(difficulty){
+   case "easy":
+     stroke(#26400D);
+     fill(#26400D);
+     rect(300,300,205,118,5);
+     break;
+   case "medium":
+     stroke(#403B0D);
+     fill(#403B0D);
+     rect(300,425,205,118,5);
+     break;
+   case "hard":
+     stroke(#40110D);
+     fill(#40110D);
+     rect(300,550,205,118,5);
+     break;
+  }
+  
+  
   backFromPreGame.show();
+  selectEasy.show();
+  selectMed.show();
+  selectHard.show();
   playGame.show();
 }
 
 void drawGame(){
   background(255);
   textSize(30);
-  text("[will play game here]",300,200);
   backFromGame.show();
-  simulateWin.show();
+  gameBoard.show();
+  keyBoard.showKey();
 }
 
 void drawPostGame(){
