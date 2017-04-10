@@ -28,6 +28,11 @@ ImageButton undo;
 GameBoard gameBoard = new GameBoard(difficulty);
 GameBoard keyBoard;
 GameBoard resetBoard;
+GameBoard firstSavedBoard;
+GameBoard secondSavedBoard;
+GameBoard thirdSavedBoard;
+GameBoard fourthSavedBoard;
+GameBoard fifthSavedBoard;
 
 ImageButton backFromPostGame;
 
@@ -105,6 +110,11 @@ void mousePressed(){
          keyBoard = new GameBoard(gameBoard);
          keyBoard.randomize();
          resetBoard = new GameBoard(gameBoard);
+         firstSavedBoard = new GameBoard(gameBoard);
+         secondSavedBoard = new GameBoard(gameBoard);
+         thirdSavedBoard = new GameBoard(gameBoard);
+         fourthSavedBoard = new GameBoard(gameBoard);
+         fifthSavedBoard = new GameBoard(gameBoard);
          menu = "game";
          frames = 0;
          seconds = 0;
@@ -115,6 +125,9 @@ void mousePressed(){
      }
      if(reset.isOver()){
       gameBoard = new GameBoard(resetBoard); 
+     }
+     if(undo.isOver()){
+      undoMove(); 
      }
      break;
    case "postGame":
@@ -128,6 +141,14 @@ void mousePressed(){
 void keyPressed(){
    switch(menu){
     case "game":
+      if(keyCode==RIGHT || keyCode==LEFT || keyCode==UP || keyCode==DOWN){
+        fifthSavedBoard = new GameBoard(fourthSavedBoard);
+        fourthSavedBoard = new GameBoard(thirdSavedBoard);
+        thirdSavedBoard = new GameBoard(secondSavedBoard);
+        secondSavedBoard = new GameBoard(firstSavedBoard);
+        firstSavedBoard = new GameBoard(gameBoard);           
+      }
+    
       if(keyCode==RIGHT){
         gameBoard.moveRight();
       }
@@ -140,6 +161,7 @@ void keyPressed(){
       if(keyCode==DOWN){
         gameBoard.moveDown();
       }
+      
    }
 }
 
@@ -207,6 +229,16 @@ void drawGame(){
   }
   fill(0);
   text("Time: " + seconds,245,100);
+}
+
+void undoMove(){
+  
+ gameBoard = new GameBoard(firstSavedBoard); 
+ firstSavedBoard = new GameBoard(secondSavedBoard);
+ secondSavedBoard = new GameBoard(thirdSavedBoard);
+ thirdSavedBoard = new GameBoard(fourthSavedBoard);
+ fourthSavedBoard = new GameBoard(fifthSavedBoard);
+ 
 }
 
 void checkWinCondition(){
