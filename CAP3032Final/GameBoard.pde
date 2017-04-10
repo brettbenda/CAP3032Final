@@ -99,7 +99,7 @@ class GameBoard{
     colorMode(HSB);
     
     fill(colors[i][j]);
-    rect(225+5+(i*(150/sideLength)),600+(j*(150/sideLength)),(150/sideLength)-5,(150/sideLength)-5,10-sideLength);
+    rect(175+5+(i*(250/sideLength)),612.5+(j*(250/sideLength)),(250/sideLength)-5,(250/sideLength)-5,15-sideLength);
    }
   }
  }

@@ -23,8 +23,11 @@ ImageButton selectHard;
 ImageButton playGame;
 
 ImageButton backFromGame;
+ImageButton reset;
+ImageButton undo;
 GameBoard gameBoard = new GameBoard(difficulty);
 GameBoard keyBoard;
+GameBoard resetBoard;
 
 ImageButton backFromPostGame;
 
@@ -41,6 +44,9 @@ void setup(){
   selectMed = new ImageButton(300,425,loadImage("medium.png"));
   selectHard = new ImageButton(300,550,loadImage("hard.png"));
   playGame = new ImageButton(300,700,loadImage("play.png"));
+  
+  reset = new ImageButton(100,800,loadImage("reset.png"));
+  undo = new ImageButton(500,800,loadImage("undo.png"));
   backFromGame = new ImageButton(60,60,loadImage("back.png"));
   
   backFromPostGame = new ImageButton(60,60,loadImage("back.png"));
@@ -98,6 +104,7 @@ void mousePressed(){
          gameBoard = new GameBoard(difficulty);
          keyBoard = new GameBoard(gameBoard);
          keyBoard.randomize();
+         resetBoard = new GameBoard(gameBoard);
          menu = "game";
          frames = 0;
          seconds = 0;
@@ -105,6 +112,9 @@ void mousePressed(){
    case "game":
      if(backFromGame.isOver()){
         menu = "home"; 
+     }
+     if(reset.isOver()){
+      gameBoard = new GameBoard(resetBoard); 
      }
      break;
    case "postGame":
@@ -185,6 +195,8 @@ void drawGame(){
   textSize(30);
   backFromGame.show();
   gameBoard.show();
+  reset.show();
+  undo.show();
   keyBoard.showKey();
   checkWinCondition();
   
