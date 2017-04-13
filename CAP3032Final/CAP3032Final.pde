@@ -5,6 +5,12 @@ Brett:
 Make buttons images instead of art we write code for
 [current ones are practical but ugly, will make nice ones eventually]
 */
+import ddf.minim.*;
+AudioPlayer song;
+Minim minim;
+//To install library: (I don't know if it's in this sketch already)
+//Sketch --> Import Library --> Search "Sound" --> Install "Minim | An audio library that provides easy to use class..."
+//By "Damian Di Fede and Anderson Mills"
 
 String menu = "home";//used to tell what menu we are on, change when we click on buttons
 String difficulty = "easy";
@@ -36,7 +42,6 @@ GameBoard fifthSavedBoard;
 
 ImageButton backFromPostGame;
 
-
 void setup(){
   size(600,900);
   start = new ImageButton(300,675,loadImage("start.png"));
@@ -55,6 +60,9 @@ void setup(){
   backFromGame = new ImageButton(60,60,loadImage("back.png"));
   
   backFromPostGame = new ImageButton(60,60,loadImage("back.png"));
+  
+  minim = new Minim(this);
+  song = minim.loadFile("beep23.mp3");
 }
 
 void draw(){
@@ -146,7 +154,9 @@ void keyPressed(){
         fourthSavedBoard = new GameBoard(thirdSavedBoard);
         thirdSavedBoard = new GameBoard(secondSavedBoard);
         secondSavedBoard = new GameBoard(firstSavedBoard);
-        firstSavedBoard = new GameBoard(gameBoard);           
+        firstSavedBoard = new GameBoard(gameBoard);   
+        song.rewind();
+        song.play();
       }
     
       if(keyCode==RIGHT){
