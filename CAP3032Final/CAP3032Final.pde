@@ -6,7 +6,7 @@ Make buttons images instead of art we write code for
 [current ones are practical but ugly, will make nice ones eventually]
 */
 import ddf.minim.*;
-AudioPlayer song;
+AudioPlayer song, buttonNoise;
 Minim minim;
 //To install library: (I don't know if it's in this sketch already)
 //Sketch --> Import Library --> Search "Sound" --> Install "Minim | An audio library that provides easy to use class..."
@@ -63,6 +63,7 @@ void setup(){
   
   minim = new Minim(this);
   song = minim.loadFile("beep23.mp3");
+  buttonNoise = minim.loadFile("POP.WAV");
 }
 
 void draw(){
@@ -105,13 +106,19 @@ void mousePressed(){
         menu = "home"; 
      }
      if(selectEasy.isOver()){
-        difficulty = "easy"; 
+        difficulty = "easy";
+        buttonNoise.rewind();
+        buttonNoise.play();
      }
      if(selectMed.isOver()){
         difficulty = "medium"; 
+        buttonNoise.rewind();
+        buttonNoise.play();
      }
      if(selectHard.isOver()){
         difficulty = "hard"; 
+        buttonNoise.rewind();
+        buttonNoise.play();
      }
      if(playGame.isOver()){
          gameBoard = new GameBoard(difficulty);
