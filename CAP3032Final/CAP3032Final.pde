@@ -6,7 +6,7 @@ Make buttons images instead of art we write code for
 [current ones are practical but ugly, will make nice ones eventually]
 */
 import ddf.minim.*;
-AudioPlayer song, buttonNoise;
+AudioPlayer song, difficultyNoise, buttonNoise, victoryNoise;
 Minim minim;
 //To install library: (I don't know if it's in this sketch already)
 //Sketch --> Import Library --> Search "Sound" --> Install "Minim | An audio library that provides easy to use class..."
@@ -63,7 +63,9 @@ void setup(){
   
   minim = new Minim(this);
   song = minim.loadFile("beep23.mp3");
-  buttonNoise = minim.loadFile("POP.WAV");
+  difficultyNoise = minim.loadFile("POP.WAV");
+  buttonNoise = minim.loadFile("TINK.WAV");
+  victoryNoise = minim.loadFile("VICTORY.WAV");
 }
 
 void draw(){
@@ -90,37 +92,47 @@ void mousePressed(){
   switch(menu){
    case "home":
       if(start.isOver()){
+        buttonNoise.rewind();
+        buttonNoise.play();
         menu = "preGame";
       }
       if(rules.isOver()){
+        buttonNoise.rewind();
+        buttonNoise.play();
         menu = "rules";
       }
       break;  
    case "rules":
       if(backFromRules.isOver()){
+        buttonNoise.rewind();
+        buttonNoise.play();
         menu = "home";
       }
       break;
    case "preGame":
      if(backFromPreGame.isOver()){
+       buttonNoise.rewind();
+        buttonNoise.play();
         menu = "home"; 
      }
      if(selectEasy.isOver()){
         difficulty = "easy";
-        buttonNoise.rewind();
-        buttonNoise.play();
+        difficultyNoise.rewind();
+        difficultyNoise.play();
      }
      if(selectMed.isOver()){
         difficulty = "medium"; 
-        buttonNoise.rewind();
-        buttonNoise.play();
+        difficultyNoise.rewind();
+        difficultyNoise.play();
      }
      if(selectHard.isOver()){
         difficulty = "hard"; 
-        buttonNoise.rewind();
-        buttonNoise.play();
+        difficultyNoise.rewind();
+        difficultyNoise.play();
      }
      if(playGame.isOver()){
+         buttonNoise.rewind();
+         buttonNoise.play();
          gameBoard = new GameBoard(difficulty);
          keyBoard = new GameBoard(gameBoard);
          keyBoard.randomize();
@@ -136,17 +148,25 @@ void mousePressed(){
      }break;
    case "game":
      if(backFromGame.isOver()){
+        buttonNoise.rewind();
+        buttonNoise.play();
         menu = "home"; 
      }
      if(reset.isOver()){
+       buttonNoise.rewind();
+        buttonNoise.play();
       gameBoard = new GameBoard(resetBoard); 
      }
      if(undo.isOver()){
+       buttonNoise.rewind();
+        buttonNoise.play();
       undoMove(); 
      }
      break;
    case "postGame":
      if(backFromPostGame.isOver()){
+       buttonNoise.rewind();
+        buttonNoise.play();
          menu = "home";
      }
      break;
@@ -278,7 +298,9 @@ void checkWinCondition(){
    winCondition = true; 
   }
   if(winCondition){
-   menu = "postGame";
+    victoryNoise.rewind();
+    victoryNoise.play();
+    menu = "postGame";
   }
 }
 
