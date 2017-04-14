@@ -41,6 +41,8 @@ GameBoard fourthSavedBoard;
 GameBoard fifthSavedBoard;
 
 ImageButton backFromPostGame;
+ImageButton startScreen;
+ImageButton background;
 
 void setup(){
   size(600,900);
@@ -61,6 +63,8 @@ void setup(){
   
   backFromPostGame = new ImageButton(60,60,loadImage("back.png"));
   
+  startScreen = new ImageButton(300,450,loadImage("TileSlider.png"));
+  background = new ImageButton(300,450,loadImage("TileSliderWithoutText.png"));
   minim = new Minim(this);
   song = minim.loadFile("beep23.mp3");
   difficultyNoise = minim.loadFile("POP.WAV");
@@ -204,7 +208,8 @@ void keyPressed(){
 
 void drawHome(){
   background(255);
-  
+  background.show();
+  startScreen.show();
   start.show();
   rules.show();
 }
@@ -213,6 +218,7 @@ void drawRules(){
   background(255);
   textSize(30);
   text("[rules go here]",300,450);
+  background.show();
   backFromRules.show();
 }
 
@@ -223,6 +229,7 @@ void drawPreGame(){
   rectMode(CENTER);
   strokeWeight(5);
   
+  background.show();
   switch(difficulty){
    case "easy":
      stroke(#26400D);
@@ -305,6 +312,7 @@ void checkWinCondition(){
 }
 
 void drawPostGame(){
+
   background(255);
   textSize(30);
   text("[will see post game stats here]",300,200);
