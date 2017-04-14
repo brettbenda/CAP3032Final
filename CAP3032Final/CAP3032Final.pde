@@ -16,6 +16,7 @@ String menu = "home";//used to tell what menu we are on, change when we click on
 String difficulty = "easy";
 int frames;
 int seconds;
+int fadeAlpha = 0;
 
 ImageButton start;
 ImageButton rules;
@@ -41,30 +42,30 @@ GameBoard fourthSavedBoard;
 GameBoard fifthSavedBoard;
 
 ImageButton backFromPostGame;
-ImageButton startScreen;
-ImageButton background;
+
+PImage background;
 
 void setup(){
   size(600,900);
-  start = new ImageButton(300,675,loadImage("start.png"));
-  rules = new ImageButton(300,800,loadImage("rules.png"));
+  start = new ImageButton(300,500,loadImage("start.png"));
+  rules = new ImageButton(300,700,loadImage("rules.png"));
+  
+  background = loadImage("temoTileSliderBackground.png");
   
   backFromRules = new ImageButton(60,60,loadImage("back.png"));
   
   backFromPreGame = new ImageButton(60,60,loadImage("back.png"));
-  selectEasy = new ImageButton(300,300,loadImage("easy.png"));
-  selectMed = new ImageButton(300,425,loadImage("medium.png"));
-  selectHard = new ImageButton(300,550,loadImage("hard.png"));
-  playGame = new ImageButton(300,700,loadImage("play.png"));
+  selectEasy = new ImageButton(300,175,loadImage("easy.png"));
+  selectMed = new ImageButton(300,300,loadImage("medium.png"));
+  selectHard = new ImageButton(300,425,loadImage("hard.png"));
+  playGame = new ImageButton(300,800,loadImage("play.png"));
   
   reset = new ImageButton(100,800,loadImage("reset.png"));
   undo = new ImageButton(500,800,loadImage("undo.png"));
   backFromGame = new ImageButton(60,60,loadImage("back.png"));
   
   backFromPostGame = new ImageButton(60,60,loadImage("back.png"));
-  
-  startScreen = new ImageButton(300,450,loadImage("TileSlider.png"));
-  background = new ImageButton(300,450,loadImage("TileSliderWithoutText.png"));
+
   minim = new Minim(this);
   song = minim.loadFile("beep23.mp3");
   difficultyNoise = minim.loadFile("POP.WAV");
@@ -207,9 +208,7 @@ void keyPressed(){
 }
 
 void drawHome(){
-  background(255);
-  background.show();
-  startScreen.show();
+  background(background);
   start.show();
   rules.show();
 }
@@ -217,8 +216,8 @@ void drawHome(){
 void drawRules(){
   background(255);
   textSize(30);
+  textMode(CENTER);
   text("[rules go here]",300,450);
-  background.show();
   backFromRules.show();
 }
 
@@ -228,23 +227,25 @@ void drawPreGame(){
   
   rectMode(CENTER);
   strokeWeight(5);
+  fill(0);
+  textFont(createFont("Tahoma",50));
+  text("Difficulty:",200,100);
   
-  background.show();
   switch(difficulty){
    case "easy":
      stroke(#26400D);
      fill(#26400D);
-     rect(300,300,205,118,5);
+     rect(300,175,205,118,5);
      break;
    case "medium":
      stroke(#403B0D);
      fill(#403B0D);
-     rect(300,425,205,118,5);
+     rect(300,300,205,118,5);
      break;
    case "hard":
      stroke(#40110D);
      fill(#40110D);
-     rect(300,550,205,118,5);
+     rect(300,425,205,118,5);
      break;
   }
   
@@ -305,6 +306,8 @@ void checkWinCondition(){
    winCondition = true; 
   }
   if(winCondition){
+    frames = 0;
+    fadeAlpha = 0;
     victoryNoise.rewind();
     victoryNoise.play();
     menu = "postGame";
@@ -312,9 +315,16 @@ void checkWinCondition(){
 }
 
 void drawPostGame(){
-
-  background(255);
+  frames++;
+  if(frames==3){
+    println(frames);
+    fadeAlpha++;
+    frames = 0;
+  }
+  fill(255,fadeAlpha);
+  rect(0,0,600,900);
   textSize(30);
-  text("[will see post game stats here]",300,200);
+  fill(0);
+  text("You finished the game in " + seconds  + " seconds.",50,200);
   backFromPostGame.show();
 }
