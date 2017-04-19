@@ -343,7 +343,6 @@ void checkWinCondition(){
 }
 
 void drawPostGame(){
-  //draws the post game screen
   frames++;
   if(frames==3){
     println(frames);
@@ -352,8 +351,41 @@ void drawPostGame(){
   }
   fill(255,fadeAlpha);
   rect(0,0,600,900);
-  textSize(30);
+  textAlign(CENTER);
+  textSize(25);
   fill(0);
-  text("You finished the game in " + seconds  + " seconds.",50,200);
+  text("You finished the game in " + seconds  + " seconds.",width/2,height*2/3);
   backFromPostGame.show();
+  victoryblocks();
+}
+
+//decoration for win screen
+void victoryblocks() {
+  pushMatrix();
+  int totalNum = 7;
+  for(int i=0; i<totalNum; i++) {
+    rectMode(CORNER);
+    noStroke();
+    fill(random(100,255),random(100,255),random(100,255));
+    rect( (2.5*(i+1))+(80*i)+15, height/3, 70, 70);
+  }
+  for(int i=0; i<7; i++) {
+    fill(0);
+    stroke(0);
+    textSize(75);
+    textAlign(CENTER,CENTER);
+    char letter;
+    switch(i) {
+      case 0: letter = 'V'; break;
+      case 1: letter = 'I'; break;
+      case 2: letter = 'C'; break;
+      case 3: letter = 'T'; break;
+      case 4: letter = 'O'; break;
+      case 5: letter = 'R'; break;
+      case 6: letter = 'Y'; break;
+      default: letter = ' '; break;
+    }
+    text(letter, (2.5*(i+1))+(80*i)+50, height/3+30);
+  }
+  popMatrix();
 }
