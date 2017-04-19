@@ -10,11 +10,13 @@ class ImageButton{
  }
  
  void show(){
+   //shows images
    imageMode(CENTER);
    image(image,x,y);
  }
  
  boolean isOver(){
+   //checks if the mouse is over the button in reference
    if(mouseX > x - image.width/2 && mouseX < x + image.width/2){
     if(mouseY > y - image.height/2 && mouseY < y + image.height/2){
      return true; 

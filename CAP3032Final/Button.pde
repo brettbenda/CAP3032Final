@@ -16,6 +16,7 @@ class Button{
  }
  
  void show(){
+   //basically draws the button
    rectMode(CENTER);
    noStroke();
    fill(col);
@@ -29,6 +30,7 @@ class Button{
  }
  
  boolean isOver(){
+   //checks whether the mouse is over the button
    if(mouseX > x - w/2 && mouseX < x + w/2){
     if(mouseY > y - h/2 && mouseY < y + h/2){
      return true; 

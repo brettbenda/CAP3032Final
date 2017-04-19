@@ -1,0 +1,23 @@
+Instruction Manual – How to Play our Game
+
+Upon running our game, you will be at a start screen. From this screen, you can either 
+select to read the rules of the game, or choose to start.
+
+When start is chosen, you will be prompted to select a difficulty, 
+Easy, Medium, or Hard. The difficulties will determine the size of the gameboard, 
+Easy being 5x5, medium 7x7, and Hard 9x9. Then 
+
+The goal of the game is to match the larger canvas to the smaller canvas’ pattern. 
+This will result in a win. Using the arrow keys will shift all the tiles left, right, 
+up, or down depending on the user input. All tiles will move in the direction prompted, 
+unless blocked by the edge of the canvas or by the wall tiles (tiles which are black). 
+It is a race against the clock, as you want to see how quickly you can match the canvas 
+to the key. If lost, there are two buttons. One is an undo button, represented by an 
+arrow key. This will undo your last move up to 5 times in a row. The other is a reset 
+button, represented by a circle with a line through it. This will reset the canvas back 
+to where it originally was at the start of the round (without changing the end goal, of 
+course). Once the two canvases match, you will be prompted to a victory screen, 
+displaying your time and allowing you to return to the main menu or play again. 
+
+In order to run our game, open the "CAP3032" .pde file and it will open all attached
+classes, as well as implement any audio or image files that we currently use.

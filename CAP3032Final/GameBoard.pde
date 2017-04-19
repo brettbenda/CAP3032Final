@@ -6,6 +6,7 @@ class GameBoard{
                            ,color(#ff11cc),color(#ffcc11),color(#11ffcc),color(#11ccff),color(#cc11ff),color(#ccff11)};
  
  GameBoard(GameBoard input){
+   //creates the gameboard
      this.difficulty = input.difficulty;
      this.colors = new color[input.sideLength][input.sideLength];
      this.sideLength = input.sideLength;
@@ -18,6 +19,7 @@ class GameBoard{
  }
  
  GameBoard(String difficulty){
+   //creates the game board
    if(difficulty.equals("hard")){
      this.difficulty = difficulty;
      this.colors = new color[9][9];
@@ -73,6 +75,7 @@ class GameBoard{
  }
  
  void show(){
+   //draws the gameboard
   rectMode(CENTER); 
   stroke(230);
   noFill();
@@ -92,6 +95,7 @@ class GameBoard{
  }
  
  void showKey(){
+   //shows the key to which we want the user to achieve
   rectMode(CORNER);
   noStroke(); 
   for(int i = 0;i<sideLength;i++){
@@ -105,6 +109,7 @@ class GameBoard{
  }
  
  void randomize(){
+   //randomizes the moves made on the game board to give the player a challenge to solve
    int times=0;
    switch(difficulty){
     case "easy":
@@ -139,6 +144,7 @@ class GameBoard{
  }
  
  void moveRight(){
+   //shifts everything that can shift to the right
   for(int i = sideLength-1;i>=0;i--){
    for(int j = 0;j<sideLength;j++){
      if(i+1==sideLength){
@@ -158,6 +164,7 @@ class GameBoard{
  }
  
   void moveLeft(){
+    //shifts everything that can shift to the left
   for(int i = 0;i<sideLength;i++){
    for(int j = 0;j<sideLength;j++){
      if(i-1==-1){
@@ -177,6 +184,7 @@ class GameBoard{
  }
  
   void moveDown(){
+    //shifts everything that can shift to the down direction
   for(int i = 0;i<sideLength;i++){
    for(int j = sideLength-1;j>=0;j--){
      if(j+1==sideLength){
@@ -196,6 +204,7 @@ class GameBoard{
  }
  
   void moveUp(){
+    //shifts everything that can shift to the up direction
   for(int i = 0;i<sideLength;i++){
    for(int j = 0;j<sideLength;j++){
      if(j-1==-1){

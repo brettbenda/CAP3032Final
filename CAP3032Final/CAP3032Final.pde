@@ -94,6 +94,7 @@ void draw(){
 }
 
 void mousePressed(){
+  //judging by what the mouse clicks on, it will switch between cases (so like between home screen and rules)
   switch(menu){
    case "home":
       if(start.isOver()){
@@ -179,6 +180,7 @@ void mousePressed(){
 }
 
 void keyPressed(){
+  //this method allows us to denote which direction to move the gameboard in
    switch(menu){
     case "game":
       if(keyCode==RIGHT || keyCode==LEFT || keyCode==UP || keyCode==DOWN){
@@ -208,12 +210,14 @@ void keyPressed(){
 }
 
 void drawHome(){
+  //will draw the home screen
   background(background);
   start.show();
   rules.show();
 }
 
 void drawRules(){
+  //will draw the rules screen
   background(255);
   textSize(30);
   textMode(CENTER);
@@ -222,6 +226,7 @@ void drawRules(){
 }
 
 void drawPreGame(){
+  //will draw pregame, with a selection of difficulty and another case switch
   background(255);
   textSize(30);
   
@@ -258,6 +263,7 @@ void drawPreGame(){
 }
 
 void drawGame(){
+  //will draw and setup the actual game
   background(255);
   textSize(30);
   backFromGame.show();
@@ -287,7 +293,7 @@ void undoMove(){
 }
 
 void checkWinCondition(){
- 
+ //this method runs a simple array comparison to check the win condition
   color[][] gameboard = gameBoard.colors;
   color[][] keyboard = keyBoard.colors;
   int iterator = 0;
@@ -315,6 +321,7 @@ void checkWinCondition(){
 }
 
 void drawPostGame(){
+  //draws the post game screen
   frames++;
   if(frames==3){
     println(frames);
