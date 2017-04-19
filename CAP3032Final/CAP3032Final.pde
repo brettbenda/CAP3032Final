@@ -217,11 +217,33 @@ void drawHome(){
 }
 
 void drawRules(){
-  //will draw the rules screen
+  pushMatrix();
   background(255);
-  textSize(30);
+  noStroke();
+  fill(245,161,161);
+  rectMode(CORNER);
+  rect(30,150,width-60,510);
   textMode(CENTER);
-  text("[rules go here]",300,450);
+  fill(0);
+  textSize(50);
+  textAlign(CENTER);
+  text("Rules",width/2,200);
+  textSize(25);
+  textAlign(LEFT);
+  text("The goal of the game is to match a “key”",40,250);
+  text("pattern displayed at the bottom of the",40,280);
+  text("screen by manipulating a set of color tiles",40,310);
+  text("on the game board.",40,340);
+  text("1.  When the game begins, the player will ",50,380);
+  text("use the keyboard arrow keys to slide",90,410);
+  text("all color tiles on the game board in the",90,440);
+  text("input direction.",90,470);
+  text("2.  If a tile collides with another tile, they",50,510);
+  text("move as one unit until separated.",90,540);
+  text("3.  If a tile collides with a wall (black block)",50,580);
+  text("or the edge of the board, it cannot",90,610);
+  text("move further in that direction.",90,640);
+  popMatrix();
   backFromRules.show();
 }
 
